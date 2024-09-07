@@ -18,13 +18,43 @@ __webpack_require__.r(__webpack_exports__);
 class OffersAndNeeds {
   constructor() {
     this.links = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.tomc-community-offers-and-needs-link');
+    this.postNeedSpan = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-post-need');
+    this.addNeedOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-add-need-overlay');
+    this.addNeedOverlayCloseButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-add-need-overlay-close');
+    this.addNeedBody = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-add-event-overlay-body');
+    this.addNeedContinue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-add-need-continue');
+    this.addNeedTitleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-new-need-title');
+    this.noTitleError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-add-event-no-title-error');
     this.events();
+    this.needTitle;
   }
   events() {
     this.links.on('click', this.animateSpan.bind(this));
+    this.postNeedSpan.on('click', this.openAddNeedOverlay.bind(this));
+    this.addNeedOverlayCloseButton.on('click', this.closeAddNeedOverlay.bind(this));
+    this.addNeedContinue.on('click', this.setTitle.bind(this));
   }
   animateSpan(e) {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('contracting');
+  }
+  openAddNeedOverlay(e) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('contracting');
+    this.addNeedOverlay.removeClass('hidden');
+    this.addNeedOverlay.addClass('search-overlay--active');
+  }
+  closeAddNeedOverlay() {
+    this.addNeedBody.html('');
+    this.addNeedOverlay.removeClass('search-overlay--active');
+    this.addNeedOverlay.addClass('hidden');
+  }
+  setTitle() {
+    if (this.addNeedTitleInput.val() != '') {
+      this.noTitleError.addClass('hidden');
+      this.needTitle = this.addNeedTitleInput.val();
+      console.log(this.needTitle);
+    } else {
+      this.noTitleError.removeClass('hidden');
+    }
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OffersAndNeeds);
